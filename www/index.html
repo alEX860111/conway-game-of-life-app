@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<title></title>
+	<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+	<!-- ionic/angularjs js -->
+	<script src="lib/ionic/js/ionic.bundle.js"></script>
+	<!-- cordova script (this will be a 404 during development) -->
+	<script src="cordova.js"></script>
+	<script src="lib/lodash/dist/lodash.js"></script>
+	<!-- your app's js -->
+	<script src="js/game/gameController.js"></script>
+	<script src="js/game/game.js"></script>
+	<script src="js/game/rules.js"></script>
+	<script src="js/game/patterns.js"></script>
+	<script src="js/app.js"></script>
+</head>
+
+<body ng-app="starter">
+	<ion-pane>
+		<ion-header-bar class="bar-stable">
+			<h1 class="title">Conway Game Of Life</h1>
+		</ion-header-bar>
+		<ion-content>
+			<div ng-controller="gameController">
+				<div class="list">
+					<label class="item item-input item-select">
+						<div class="input-label">
+							Pattern
+						</div>
+						<select ng-disabled="isActive" ng-options="pattern as pattern.title for pattern in patterns" ng-model="selectedPattern"> </select>
+					</label>
+				</div>
+				<table class="board" ng-class="{'is-active': isActive}">
+					<tr ng-repeat="row in rows track by $index">
+						<td ng-repeat="col in row track by $index" class="field" ng-attr-style="width: {{size}}px; height: {{size}}px" ng-class="{'is-alive': rows[$parent.$index][$index]}" ng-click="changeCellState($parent.$index, $index)" ng-disabled="isActive"></td>
+					</tr>
+				</table>
+				<div class="button-bar">
+					<button class="button button-positive icon ion-refresh" ng-click="loadPattern(selectedPattern)" ng-disabled="isActive"></button>
+					<button class="button button-assertive icon ion-trash-a" ng-click="resetBoard()" ng-disabled="isActive"></button>
+					<button class="button" ng-class="{'button-balanced icon ion-play': !isActive, 'button-assertive icon ion-stop': isActive}" ng-click="toggleActive()" ng-disabled="gameOver"></button>
+				</div>
+				<div class="item range">
+					<i class="icon ion-ios-speedometer-outline"></i>
+					<input type="range" name="speed" min="1" max="30" ng-model="roundsPerSecond">
+					<i class="icon ion-ios-speedometer"></i>
+				</div>
+				<div class="card" ng-show="gameOver">
+					<div class="item item-text-wrap">
+						Game Over.
+					</div>
+				</div>
+			</div>
+		</ion-content>
+	</ion-pane>
+</body>
+
+</html>
