@@ -1,7 +1,3 @@
-.controls {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
 .board {
     border-collapse: collapse;
     margin-top: 20px;
@@ -10,27 +6,23 @@
     margin-right: auto;
     cursor: pointer;
 }
+
 .board.is-active {
-  cursor: not-allowed;
+    cursor: not-allowed;
 }
+
 .field.is-alive {
     background-color: black;
 }
+
 .field {
     border: 1px solid grey;
 }
+
 .board:not(.is-active) .field:hover {
-  background-color: black;
+    background-color: black;
 }
+
 .board:not(.is-active) .field.is-alive:hover {
-  background-color: rgba(0,0,0,0.1);
-}
-.panel {
-  margin-top: 20px;
-}
-input {
-  pointer-events: all !important;
-}
-body {
-  padding-bottom: 50px;
+    background-color: rgba(0, 0, 0, 0.1);
 }
