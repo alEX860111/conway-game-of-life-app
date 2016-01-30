@@ -26,7 +26,7 @@ gulp.task('sass', function(done) {
     .on('end', done);
 });
 
-gulp.task('watch', function() {
+gulp.task('sass-watch', function() {
   gulp.watch(paths.sass, ['sass']);
 });
 

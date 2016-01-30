@@ -32,6 +32,7 @@
     "postinstall": "node node_modules/bower/bin/bower install",
     "test": "node node_modules/gulp/bin/gulp test",
     "test-single-run": "node node_modules/gulp/bin/gulp test-single-run",
-    "sass": "node node_modules/gulp/bin/gulp sass"
+    "sass": "node node_modules/gulp/bin/gulp sass",
+    "sass-watch": "node node_modules/gulp/bin/gulp sass-watch"
   }
 }

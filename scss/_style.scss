@@ -1,28 +1,18 @@
 .board {
-    border-collapse: collapse;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    cursor: pointer;
-}
-
-.board.is-active {
-    cursor: not-allowed;
-}
-
-.field.is-alive {
-    background-color: black;
+	border-collapse: collapse;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: pointer;
+	&.is-active {
+		cursor: not-allowed;
+	}
 }
 
 .field {
-    border: 1px solid grey;
-}
-
-.board:not(.is-active) .field:hover {
-    background-color: black;
-}
-
-.board:not(.is-active) .field.is-alive:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+	border: 1px solid grey;
+	&.is-alive {
+		background-color: black;
+	}
 }
