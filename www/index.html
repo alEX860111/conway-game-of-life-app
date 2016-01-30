@@ -31,28 +31,41 @@
 						<div class="input-label">
 							Pattern
 						</div>
-						<select ng-disabled="isActive" ng-options="pattern as pattern.title for pattern in patterns" ng-model="selectedPattern"> </select>
+						<select ng-disabled="active" ng-options="pattern as pattern.title for pattern in patterns" ng-model="selectedPattern"> </select>
 					</label>
-				</div>
-				<table class="board" ng-class="{'is-active': isActive}">
-					<tr ng-repeat="row in rows track by $index">
-						<td ng-repeat="col in row track by $index" class="field" ng-attr-style="width: {{size}}px; height: {{size}}px" ng-class="{'is-alive': rows[$parent.$index][$index]}" ng-click="changeCellState($parent.$index, $index)" ng-disabled="isActive"></td>
-					</tr>
-				</table>
-				<div class="button-bar">
-					<button class="button button-positive icon ion-refresh" ng-click="loadPattern(selectedPattern)" ng-disabled="isActive"></button>
-					<button class="button button-assertive icon ion-trash-a" ng-click="resetBoard()" ng-disabled="isActive"></button>
-					<button class="button" ng-class="{'button-balanced icon ion-play': !isActive, 'button-assertive icon ion-stop': isActive}" ng-click="toggleActive()" ng-disabled="gameOver"></button>
-				</div>
-				<div class="item range">
-					<i class="icon ion-ios-speedometer-outline"></i>
-					<input type="range" name="speed" min="1" max="30" ng-model="roundsPerSecond">
-					<i class="icon ion-ios-speedometer"></i>
 				</div>
 				<div class="card" ng-show="gameOver">
 					<div class="item item-text-wrap">
 						Game Over.
 					</div>
+				</div>
+				<div class="card" ng-show="!locked">
+					<div class="item item-text-wrap">
+						<i class="icon ion-edit"></i> You can now edit the pattern.
+					</div>
+				</div>
+				<ion-scroll zooming="true" direction="xy">
+					<table id="board" class="board" ng-attr-style="width: {{size * rows.length}}px; height: {{size * rows[0].length}}px" ng-class="{'is-active': active}">
+						<tr ng-repeat="row in rows track by $index">
+							<td ng-repeat="col in row track by $index" class="field" ng-class="{'is-alive': rows[$parent.$index][$index]}" ng-click="changeCellState($parent.$index, $index)" ng-disabled="active"></td>
+						</tr>
+					</table>
+				</ion-scroll>
+				<div class="button-bar">
+					<button class="button button-positive icon ion-refresh" ng-click="loadPattern(selectedPattern)" ng-disabled="active"></button>
+					<button class="button button-assertive icon ion-trash-a" ng-click="resetBoard()" ng-disabled="active"></button>
+					<button class="button button-energized icon" ng-class="{'ion-locked': locked, 'ion-unlocked': !locked}" ng-click="toggleLock()" ng-disabled="active"></button>
+					<button class="button" ng-class="{'button-balanced icon ion-play': !active, 'button-assertive icon ion-stop': active}" ng-click="toggleActive()" ng-disabled="gameOver || !locked"></button>
+				</div>
+				<div class="item range">
+					<i class="icon ion-ios-speedometer-outline"></i>
+					<input type="range" name="speed" min="1" max="50" ng-model="roundsPerSecond">
+					<i class="icon ion-ios-speedometer"></i>
+				</div>
+				<div class="item range">
+					<i class="icon ion-minus"></i>
+					<input type="range" name="size" min="{{minSize}}" max="{{maxSize}}" ng-model="size">
+					<i class="icon ion-plus"></i>
 				</div>
 			</div>
 		</ion-content>

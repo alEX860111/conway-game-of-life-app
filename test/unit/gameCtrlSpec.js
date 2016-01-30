@@ -28,8 +28,8 @@ describe("gameController", function() {
 
 	it("defaults", function() {
 		expect(scope.gameOver).toBe(false);
-		expect(scope.isActive).toBe(false);
-		expect(scope.size).toEqual(30);
+		expect(scope.active).toBe(false);
+		expect(scope.size).toBeDefined();
 		expect(scope.roundsPerSecond).toEqual(10);
 		expect(scope.round).toEqual(0);
 		expect(scope.buttonValue).toEqual("Play");
@@ -37,10 +37,10 @@ describe("gameController", function() {
 	});
 
 	it("toggle buttonValue", function() {
-		scope.isActive = true;
+		scope.active = true;
 		scope.$apply();
 		expect(scope.buttonValue).toEqual("Pause");
-		scope.isActive = false;
+		scope.active = false;
 		scope.$apply();
 		expect(scope.buttonValue).toEqual("Play");
 	});
@@ -58,6 +58,7 @@ describe("gameController", function() {
 	});
 
 	it("changeCellState", function() {
+		scope.locked = false;
 		scope.gameOver = true;
 
 		scope.changeCellState(2, 3);
@@ -66,12 +67,12 @@ describe("gameController", function() {
 	});
 
 	it("toggleActive", function() {
-		scope.isActive = false;
+		scope.active = false;
 		scope.gameOver = true;
 
 		scope.toggleActive();
 
-		expect(scope.isActive).toEqual(true);
+		expect(scope.active).toEqual(true);
 		expect(scope.gameOver).toEqual(false);
 
 		expect(scope.gameOver).toEqual(false);

@@ -9,3 +9,4 @@ www/css/
 resources/
 *.sublime-project
 *.sublime-workspace
+release.sh
