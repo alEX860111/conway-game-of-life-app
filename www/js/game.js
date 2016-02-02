@@ -1,5 +1,5 @@
 angular.module("game")
-	.factory("gameService", ["survives", function(survives) {
+	.factory("gameService", ["rules", function(rules) {
 		function confineIndex(idx, size) {
 			var MIN_IDX = 0;
 			var MAX_IDX = size - 1;
@@ -41,7 +41,7 @@ angular.module("game")
 						numAliveNeighbors += getAliveCount(rows, rowIdx + 1, colIdx - 1);
 						numAliveNeighbors += getAliveCount(rows, rowIdx + 1, colIdx);
 						numAliveNeighbors += getAliveCount(rows, rowIdx + 1, colIdx + 1);
-						var cellSurvives = survives(rows[rowIdx][colIdx], numAliveNeighbors);
+						var cellSurvives = rules.survives(rows[rowIdx][colIdx], numAliveNeighbors);
 						if (cellSurvives) {
 							gameOver = false;
 						}
