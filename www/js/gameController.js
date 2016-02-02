@@ -29,12 +29,14 @@ angular.module("game", [])
 			$scope.buttonValue = $scope.active ? "Pause" : "Play";
 		});
 
-		$scope.$watch("selectedPattern", function() {
+		$scope.loadPattern = function() {
 			$scope.rows = _.cloneDeep($scope.selectedPattern.rows);
 			nextRows = _.cloneDeep($scope.rows);
 			$scope.gameOver = false;
 			$scope.size = $window.screen.width / $scope.rows.length;
-		});
+		};
+
+		$scope.$watch("selectedPattern", $scope.loadPattern);
 
 		$scope.$watch("gameOver", function() {
 			stop();
