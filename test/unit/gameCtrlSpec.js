@@ -26,6 +26,14 @@ describe("gameController", function() {
 		scope.$apply();
 	}));
 
+	describe("toggleLocked", function() {
+		it("toggleLocked", function() {
+			expect(scope.locked).toBe(true);
+			scope.toggleLocked();
+			expect(scope.locked).toBe(false);
+		});
+	});
+
 	it("defaults", function() {
 		expect(scope.gameOver).toBe(false);
 		expect(scope.active).toBe(false);

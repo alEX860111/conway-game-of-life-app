@@ -54,7 +54,7 @@
 				<div class="button-bar">
 					<button class="button button-positive icon ion-refresh" ng-click="loadPattern(selectedPattern)" ng-disabled="active"></button>
 					<button class="button button-assertive icon ion-trash-a" ng-click="resetBoard()" ng-disabled="active"></button>
-					<button class="button button-energized icon" ng-class="{'ion-locked': locked, 'ion-unlocked': !locked}" ng-click="toggleLock()" ng-disabled="active"></button>
+					<button class="button button-energized icon" ng-class="{'ion-locked': locked, 'ion-unlocked': !locked}" ng-click="toggleLocked()" ng-disabled="active"></button>
 					<button class="button" ng-class="{'button-balanced icon ion-play': !active, 'button-assertive icon ion-stop': active}" ng-click="toggleActive()" ng-disabled="gameOver || !locked"></button>
 				</div>
 				<div class="item range">

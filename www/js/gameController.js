@@ -14,7 +14,10 @@ angular.module("game", [])
 		$scope.rows = undefined;
 		var nextRows = undefined;
 
-		$scope.toggleLock = function() {
+		$scope.patterns = patterns;
+		$scope.selectedPattern = $scope.patterns[0];
+
+		$scope.toggleLocked = function() {
 			$scope.locked = !$scope.locked;
 		};
 
@@ -27,16 +30,11 @@ angular.module("game", [])
 		});
 
 		$scope.$watch("selectedPattern", function() {
-			$scope.loadPattern($scope.selectedPattern);
-		});
-
-		$scope.loadPattern = function(pattern) {
-			$scope.selectedPattern = pattern;
 			$scope.rows = _.cloneDeep($scope.selectedPattern.rows);
 			nextRows = _.cloneDeep($scope.rows);
 			$scope.gameOver = false;
 			$scope.size = $window.screen.width / $scope.rows.length;
-		};
+		});
 
 		$scope.$watch("gameOver", function() {
 			stop();
@@ -83,9 +81,5 @@ angular.module("game", [])
 			$scope.gameOver = false;
 			$scope.round = 0;
 		};
-
-		$scope.patterns = patterns;
-
-		$scope.loadPattern($scope.patterns[0]);
 
 	}]);
